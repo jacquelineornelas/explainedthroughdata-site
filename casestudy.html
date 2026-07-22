@@ -88,28 +88,32 @@
     }
     .band p:last-child { margin-bottom: 0; }
 
-    /* Chart sections */
+    /* Chart sections. Each box sizes to its actual chart (set in Google
+       Sheets), plus one fixed, uniform 24px padding on all four sides.
+       Nothing stretches to fill the row, so every border reads as the
+       same measurement, top row boxes are simply larger because their
+       charts are larger (560x260 vs 460x220), not because of CSS tricks. */
     .chart-section { margin-top: 40px; }
     .chart-grid-2 {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
       gap: 24px;
-      max-width: 1280px;
-      margin: 0 auto;
     }
     .chart-cell {
       background: rgba(230, 224, 214, 0.35);
+      border: 1px solid rgba(176, 137, 94, 0.25);
       border-radius: 8px;
       padding: 24px;
       overflow: hidden;
       position: relative;
+      flex: 0 0 auto;
     }
     .chart-cell iframe {
-      width: 100% !important;
-      max-width: 100% !important;
-      border: none;
       display: block;
-      height: 335px;
+      border: none;
+      max-width: 100%;
     }
 
     /* CTA */
@@ -152,7 +156,7 @@
       .container { padding: 48px 20px; }
       .band { margin-bottom: 56px; }
       .hero img.logo { width: 160px; margin-bottom: 24px; }
-      .chart-grid-2 { grid-template-columns: 1fr; gap: 20px; }
+      .chart-grid-2 { gap: 20px; }
       .chart-section { margin-top: 28px; }
     }
   </style>
@@ -169,7 +173,7 @@
     </section>
 
     <section class="band">
-      <div class="eyebrow">The Experiment</div>
+      <div class="eyebrow">The Process Improvement Project</div>
       <p>Ninety days of documenting real life without a pass or fail attached. Every morning starts with the same short set of measurements. Every evening closes with a written reflection. Six pillars run underneath: Body, Career, Relational and Spiritual, Community, and the quiet fifth of Documentation itself.</p>
       <p>The frame is Lean Six Sigma, DMAIC, and Statistical Process Control, applied to a person instead of a factory. That is not a metaphor. Every measurement has an operational definition, every finding has a Special Cause or Common Cause verdict, and every ruling is dated and defensible.</p>
     </section>
@@ -181,10 +185,10 @@
       <div class="chart-section">
         <div class="chart-grid-2">
           <div class="chart-cell">
-            <iframe height="335" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=1402604725&amp;format=interactive"></iframe>
+            <iframe width="560" height="260" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=1402604725&amp;format=interactive"></iframe>
           </div>
           <div class="chart-cell">
-            <iframe height="335" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=220261141&amp;format=interactive"></iframe>
+            <iframe width="560" height="260" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=220261141&amp;format=interactive"></iframe>
           </div>
         </div>
       </div>
@@ -197,16 +201,16 @@
       <div class="chart-section">
         <div class="chart-grid-2">
           <div class="chart-cell">
-            <iframe height="335" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=951108434&amp;format=interactive"></iframe>
+            <iframe width="460" height="220" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=951108434&amp;format=interactive"></iframe>
           </div>
           <div class="chart-cell">
-            <iframe height="335" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=721561208&amp;format=interactive"></iframe>
+            <iframe width="460" height="220" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=721561208&amp;format=interactive"></iframe>
           </div>
           <div class="chart-cell">
-            <iframe height="335" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=1969853697&amp;format=interactive"></iframe>
+            <iframe width="460" height="220" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=1969853697&amp;format=interactive"></iframe>
           </div>
           <div class="chart-cell">
-            <iframe height="335" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=262821323&amp;format=interactive"></iframe>
+            <iframe width="460" height="220" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=262821323&amp;format=interactive"></iframe>
           </div>
         </div>
       </div>
