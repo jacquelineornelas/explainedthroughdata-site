@@ -100,14 +100,16 @@
     .chart-cell {
       background: rgba(230, 224, 214, 0.35);
       border-radius: 8px;
-      padding: 20px;
+      padding: 16px;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: stretch;
       justify-content: center;
+      overflow: hidden;
     }
     .chart-cell iframe {
       width: 100%;
+      max-width: 100%;
       border: none;
       display: block;
       min-height: 335px;
