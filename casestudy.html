@@ -10,7 +10,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="apple_touch_icon_180 (1).png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Gelasio:wght@700&family=Montserrat:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Gelasio:wght@700&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
       --warm-paper: #FAF8F5;
@@ -26,12 +26,12 @@
       line-height: 1.6;
     }
     .container {
-      max-width: 1080px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 80px 24px;
+      padding: 56px 24px;
     }
     .band {
-      margin-bottom: 96px;
+      margin-bottom: 72px;
       text-align: center;
     }
     .band:last-of-type { margin-bottom: 0; }
@@ -41,18 +41,20 @@
       width: 200px;
       max-width: 60vw;
       height: auto;
-      margin-bottom: 48px;
+      margin-bottom: 32px;
     }
     .hero h1 {
       font-family: 'Gelasio', serif;
       font-weight: 700;
-      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-size: clamp(2rem, 4.5vw, 3.25rem);
       line-height: 1.1;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
       max-width: 1080px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .hero .sub {
-      font-size: clamp(1rem, 1.6vw, 1.25rem);
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
       line-height: 1.5;
       color: rgba(32, 48, 58, 0.75);
       max-width: 720px;
@@ -67,45 +69,47 @@
       letter-spacing: 0.15em;
       color: var(--brass);
       text-transform: uppercase;
-      margin-bottom: 24px;
+      margin-bottom: 16px;
     }
 
     /* H2 */
     h2 {
       font-family: 'Gelasio', serif;
       font-weight: 700;
-      font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+      font-size: clamp(1.5rem, 3vw, 2rem);
       color: var(--deep-navy);
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
 
     /* Body copy */
     .band p {
-      font-size: clamp(1rem, 1.4vw, 1.125rem);
+      font-size: clamp(1rem, 1.3vw, 1.1rem);
       line-height: 1.6;
-      max-width: 720px;
-      margin: 0 auto 16px;
+      max-width: 760px;
+      margin: 0 auto 14px;
     }
     .band p:last-child { margin-bottom: 0; }
 
-    /* Chart bands */
-    .chart-section {
-      margin-top: 48px;
-    }
-    .chart-row {
+    /* Chart sections */
+    .chart-section { margin-top: 32px; }
+    .chart-pair {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 32px;
-      max-width: 1080px;
+      gap: 24px;
+      max-width: 1200px;
       margin: 0 auto;
     }
-    .chart-row.stacked {
-      grid-template-columns: 1fr;
+    .chart-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
     .chart-cell {
       background: rgba(230, 224, 214, 0.35);
       border-radius: 8px;
-      padding: 16px;
+      padding: 12px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -113,18 +117,8 @@
     }
     .chart-cell iframe {
       width: 100%;
-      max-width: 100%;
       border: none;
       display: block;
-    }
-    .chart-caption {
-      font-family: 'Montserrat', sans-serif;
-      font-style: italic;
-      font-size: 0.875rem;
-      color: rgba(32, 48, 58, 0.6);
-      margin-top: 12px;
-      line-height: 1.5;
-      text-align: left;
     }
 
     /* CTA */
@@ -138,7 +132,7 @@
       border-radius: 999px;
       text-decoration: none;
       transition: background-color 0.2s ease;
-      margin-top: 24px;
+      margin-top: 20px;
     }
     .cta:hover { background: #C2A06A; }
 
@@ -148,27 +142,32 @@
       font-size: 0.875rem;
       color: var(--brass);
       text-decoration: none;
-      margin-bottom: 32px;
+      margin-bottom: 24px;
     }
     .back-link:hover { text-decoration: underline; }
 
     /* Footer */
     footer {
       text-align: center;
-      padding: 32px 24px 48px;
+      padding: 24px 24px 40px;
       font-size: 0.875rem;
       color: rgba(32, 48, 58, 0.5);
     }
     footer a { color: inherit; text-decoration: none; }
     footer a:hover { text-decoration: underline; }
 
+    /* Tablet */
+    @media (max-width: 1024px) {
+      .chart-strip { grid-template-columns: repeat(2, 1fr); }
+    }
+
     /* Mobile */
-    @media (max-width: 768px) {
-      .container { padding: 64px 24px; }
-      .band { margin-bottom: 72px; }
-      .hero img.logo { width: 160px; margin-bottom: 32px; }
-      .chart-row { grid-template-columns: 1fr; gap: 24px; }
-      .chart-section { margin-top: 32px; }
+    @media (max-width: 640px) {
+      .container { padding: 48px 20px; }
+      .band { margin-bottom: 56px; }
+      .hero img.logo { width: 160px; margin-bottom: 24px; }
+      .chart-pair, .chart-strip { grid-template-columns: 1fr; gap: 20px; }
+      .chart-section { margin-top: 24px; }
     }
   </style>
 </head>
@@ -187,7 +186,6 @@
       <div class="eyebrow">The Experiment</div>
       <p>Ninety days of documenting real life without a pass or fail attached. Every morning starts with the same short set of measurements. Every evening closes with a written reflection. Six pillars run underneath: Body, Career, Relational and Spiritual, Community, and the quiet fifth of Documentation itself.</p>
       <p>The frame is Lean Six Sigma, DMAIC, and Statistical Process Control, applied to a person instead of a factory. That is not a metaphor. Every measurement has an operational definition, every finding has a Special Cause or Common Cause verdict, and every ruling is dated and defensible.</p>
-      <p>What follows are the charts as they read today. They will grow with the project, because the sources they read from are live.</p>
     </section>
 
     <section class="band">
@@ -195,7 +193,7 @@
       <h2>The engine and the funnel.</h2>
       <p>Every outcome downstream lives or dies on two inputs. The habits I complete and the reachouts I send. These are the levers, and they come first.</p>
       <div class="chart-section">
-        <div class="chart-row">
+        <div class="chart-pair">
           <div class="chart-cell">
             <iframe height="335" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=1402604725&amp;format=interactive"></iframe>
           </div>
@@ -211,20 +209,18 @@
       <h2>The outcomes, four ways.</h2>
       <p>These are lagging indicators. They tell the truth about what the inputs are doing, sometimes on delay, always honestly.</p>
       <div class="chart-section">
-        <div class="chart-row">
+        <div class="chart-strip">
           <div class="chart-cell">
-            <iframe height="335" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=951108434&amp;format=interactive"></iframe>
+            <iframe height="240" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=951108434&amp;format=interactive"></iframe>
           </div>
           <div class="chart-cell">
-            <iframe height="335" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=721561208&amp;format=interactive"></iframe>
-          </div>
-        </div>
-        <div class="chart-row" style="margin-top: 32px;">
-          <div class="chart-cell">
-            <iframe height="335" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=1969853697&amp;format=interactive"></iframe>
+            <iframe height="240" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=721561208&amp;format=interactive"></iframe>
           </div>
           <div class="chart-cell">
-            <iframe height="335" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=262821323&amp;format=interactive"></iframe>
+            <iframe height="240" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=1969853697&amp;format=interactive"></iframe>
+          </div>
+          <div class="chart-cell">
+            <iframe height="240" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=262821323&amp;format=interactive"></iframe>
           </div>
         </div>
       </div>
