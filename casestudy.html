@@ -26,7 +26,7 @@
       line-height: 1.6;
     }
     .container {
-      max-width: 1200px;
+      max-width: 1240px;
       margin: 0 auto;
       padding: 56px 24px;
     }
@@ -48,10 +48,8 @@
       font-weight: 700;
       font-size: clamp(2rem, 4.5vw, 3.25rem);
       line-height: 1.1;
-      margin-bottom: 20px;
+      margin: 0 auto 20px;
       max-width: 1080px;
-      margin-left: auto;
-      margin-right: auto;
     }
     .hero .sub {
       font-size: clamp(1rem, 1.5vw, 1.2rem);
@@ -91,25 +89,18 @@
     .band p:last-child { margin-bottom: 0; }
 
     /* Chart sections */
-    .chart-section { margin-top: 32px; }
-    .chart-pair {
+    .chart-section { margin-top: 40px; }
+    .chart-grid-2 {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 24px;
       max-width: 1200px;
       margin: 0 auto;
     }
-    .chart-strip {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
     .chart-cell {
       background: rgba(230, 224, 214, 0.35);
       border-radius: 8px;
-      padding: 12px;
+      padding: 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -119,6 +110,7 @@
       width: 100%;
       border: none;
       display: block;
+      min-height: 335px;
     }
 
     /* CTA */
@@ -156,18 +148,13 @@
     footer a { color: inherit; text-decoration: none; }
     footer a:hover { text-decoration: underline; }
 
-    /* Tablet */
-    @media (max-width: 1024px) {
-      .chart-strip { grid-template-columns: repeat(2, 1fr); }
-    }
-
     /* Mobile */
     @media (max-width: 640px) {
       .container { padding: 48px 20px; }
       .band { margin-bottom: 56px; }
       .hero img.logo { width: 160px; margin-bottom: 24px; }
-      .chart-pair, .chart-strip { grid-template-columns: 1fr; gap: 20px; }
-      .chart-section { margin-top: 24px; }
+      .chart-grid-2 { grid-template-columns: 1fr; gap: 20px; }
+      .chart-section { margin-top: 28px; }
     }
   </style>
 </head>
@@ -193,12 +180,12 @@
       <h2>The engine and the funnel.</h2>
       <p>Every outcome downstream lives or dies on two inputs. The habits I complete and the reachouts I send. These are the levers, and they come first.</p>
       <div class="chart-section">
-        <div class="chart-pair">
+        <div class="chart-grid-2">
           <div class="chart-cell">
             <iframe height="335" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=1402604725&amp;format=interactive"></iframe>
           </div>
           <div class="chart-cell">
-            <iframe height="336" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=220261141&amp;format=interactive"></iframe>
+            <iframe height="335" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=220261141&amp;format=interactive"></iframe>
           </div>
         </div>
       </div>
@@ -209,18 +196,18 @@
       <h2>The outcomes, four ways.</h2>
       <p>These are lagging indicators. They tell the truth about what the inputs are doing, sometimes on delay, always honestly.</p>
       <div class="chart-section">
-        <div class="chart-strip">
+        <div class="chart-grid-2">
           <div class="chart-cell">
-            <iframe height="240" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=951108434&amp;format=interactive"></iframe>
+            <iframe height="335" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=951108434&amp;format=interactive"></iframe>
           </div>
           <div class="chart-cell">
-            <iframe height="240" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=721561208&amp;format=interactive"></iframe>
+            <iframe height="335" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=721561208&amp;format=interactive"></iframe>
           </div>
           <div class="chart-cell">
-            <iframe height="240" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=1969853697&amp;format=interactive"></iframe>
+            <iframe height="335" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=1969853697&amp;format=interactive"></iframe>
           </div>
           <div class="chart-cell">
-            <iframe height="240" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=262821323&amp;format=interactive"></iframe>
+            <iframe height="335" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=262821323&amp;format=interactive"></iframe>
           </div>
         </div>
       </div>
