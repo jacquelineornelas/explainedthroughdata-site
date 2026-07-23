@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PDDWPMZY8G"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PDDWPMZY8G');
+  </script>
+  <title>Case Study — Explained Through Data</title>
+  <meta name="description" content="A 90-day live case study. Real days, honest numbers, one system built to hold both.">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon_32 (1).png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon_16 (1).png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple_touch_icon_180 (1).png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gelasio:wght@700&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --warm-paper: #FAF8F5;
+      --deep-navy: #20303A;
+      --brass: #B0895E;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--warm-paper);
+      color: var(--deep-navy);
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 56px 24px;
+    }
+    .band {
+      margin-bottom: 72px;
+      text-align: center;
+    }
+    .band:last-of-type { margin-bottom: 0; }
+
+    /* HERO */
+    .hero img.logo {
+      width: 200px;
+      max-width: 60vw;
+      height: auto;
+      margin-bottom: 32px;
+    }
+    .hero h1 {
+      font-family: 'Gelasio', serif;
+      font-weight: 700;
+      font-size: clamp(2rem, 4.5vw, 3.25rem);
+      line-height: 1.1;
+      margin: 0 auto 20px;
+      max-width: 1080px;
+    }
+    .hero .sub {
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      line-height: 1.5;
+      color: rgba(32, 48, 58, 0.75);
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* EYEBROWS */
+    .eyebrow {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      font-size: 0.875rem;
+      letter-spacing: 0.15em;
+      color: var(--brass);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    /* H2 */
+    h2 {
+      font-family: 'Gelasio', serif;
+      font-weight: 700;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      color: var(--deep-navy);
+      margin-bottom: 12px;
+    }
+
+    /* Body copy */
+    .band p {
+      font-size: clamp(1rem, 1.3vw, 1.1rem);
+      line-height: 1.6;
+      max-width: 760px;
+      margin: 0 auto 14px;
+    }
+    .band p:last-child { margin-bottom: 0; }
+
+    /* Chart sections */
+    .chart-section { margin-top: 40px; }
+    .chart-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .chart-cell {
+      background: rgba(230, 224, 214, 0.35);
+      border-radius: 8px;
+      padding: 24px;
+      overflow: hidden;
+      position: relative;
+    }
+    .chart-cell iframe {
+      width: 100% !important;
+      max-width: 100% !important;
+      border: none;
+      display: block;
+      height: 335px;
+    }
+
+    /* CTA */
+    .cta {
+      display: inline-block;
+      background: var(--brass);
+      color: var(--warm-paper);
+      font-size: 1.125rem;
+      font-weight: 500;
+      padding: 14px 36px;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: background-color 0.2s ease;
+      margin-top: 20px;
+    }
+    .cta:hover { background: #C2A06A; }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      font-size: 0.875rem;
+      color: var(--brass);
+      text-decoration: none;
+      margin-bottom: 24px;
+    }
+    .back-link:hover { text-decoration: underline; }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 24px 24px 40px;
+      font-size: 0.875rem;
+      color: rgba(32, 48, 58, 0.5);
+    }
+    footer a { color: inherit; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* Mobile */
+    @media (max-width: 640px) {
+      .container { padding: 48px 20px; }
+      .band { margin-bottom: 56px; }
+      .hero img.logo { width: 160px; margin-bottom: 24px; }
+      .chart-grid-2 { grid-template-columns: 1fr; gap: 20px; }
+      .chart-section { margin-top: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <a href="/" class="back-link">← Back to home</a>
+
+    <section class="band hero">
+      <img class="logo" src="logo_horizontal_transparent (2).png" alt="Explained Through Data">
+      <h1>Six weeks in, this is what showed up.</h1>
+      <p class="sub">A live case study in progress. Real days, honest numbers, one system built to hold both.</p>
+    </section>
+
+    <section class="band">
+      <div class="eyebrow">The Experiment</div>
+      <p>Ninety days of documenting real life without a pass or fail attached. Every morning starts with the same short set of measurements. Every evening closes with a written reflection. Six pillars run underneath: Body, Career, Relational and Spiritual, Community, and the quiet fifth of Documentation itself.</p>
+      <p>The frame is Lean Six Sigma, DMAIC, and Statistical Process Control, applied to a person instead of a factory. That is not a metaphor. Every measurement has an operational definition, every finding has a Special Cause or Common Cause verdict, and every ruling is dated and defensible.</p>
+    </section>
+
+    <section class="band">
+      <div class="eyebrow">What I Control</div>
+      <h2>The engine and the funnel.</h2>
+      <p>Every outcome downstream lives or dies on two inputs. The habits I complete and the reachouts I send. These are the levers, and they come first.</p>
+      <div class="chart-section">
+        <div class="chart-grid-2">
+          <div class="chart-cell">
+            <iframe height="335" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=1402604725&amp;format=interactive"></iframe>
+          </div>
+          <div class="chart-cell">
+            <iframe height="335" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=220261141&amp;format=interactive"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="eyebrow">What It Produces</div>
+      <h2>The outcomes, four ways.</h2>
+      <p>These are lagging indicators. They tell the truth about what the inputs are doing, sometimes on delay, always honestly.</p>
+      <div class="chart-section">
+        <div class="chart-grid-2">
+          <div class="chart-cell">
+            <iframe height="335" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=951108434&amp;format=interactive"></iframe>
+          </div>
+          <div class="chart-cell">
+            <iframe height="335" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=721561208&amp;format=interactive"></iframe>
+          </div>
+          <div class="chart-cell">
+            <iframe height="335" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=1969853697&amp;format=interactive"></iframe>
+          </div>
+          <div class="chart-cell">
+            <iframe height="335" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=262821323&amp;format=interactive"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band">
+      <h2>See a system in motion?</h2>
+      <p>Reach me if you'd like to talk about what this looks like inside client experience, account management, or a role where measured care matters.</p>
+      <a class="cta" href="mailto:ThisIsMe@ExplainedThroughData.com">Get in touch</a>
+    </section>
+
+  </div>
+
+  <footer>
+    <a href="mailto:jacquelineornelas@explainedthroughdata.com">jacquelineornelas@explainedthroughdata.com</a>
+    &nbsp;/&nbsp;
+    <a href="https://www.linkedin.com/in/jacquelineornelastx" target="_blank" rel="noopener">linkedin.com/in/jacquelineornelastx</a>
+  </footer>
+</body>
+</html>
