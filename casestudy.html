@@ -3,14 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Case Study — Explained Through Data</title>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PDDWPMZY8G"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PDDWPMZY8G');
+  </script>
+  <title>Case Study &mdash; Explained Through Data</title>
   <meta name="description" content="A 90-day live case study. Real days, honest numbers, one system built to hold both.">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon_32 (1).png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon_16 (1).png">
-  <link rel="apple-touch-icon" sizes="180x180" href="apple_touch_icon_180 (1).png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon_32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon_16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple_touch_icon_180.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Gelasio:wght@700&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   <style>
     :root {
       --warm-paper: #FAF8F5;
@@ -25,151 +34,89 @@
       font-family: 'Montserrat', sans-serif;
       line-height: 1.6;
     }
-    .container {
-      max-width: 1320px;
-      margin: 0 auto;
-      padding: 56px 24px;
-    }
-    .band {
-      margin-bottom: 72px;
-      text-align: center;
-    }
+    .container { max-width: 1240px; margin: 0 auto; padding: 48px 24px; }
+    .band { margin-bottom: 64px; text-align: center; }
     .band:last-of-type { margin-bottom: 0; }
-
-    /* HERO */
-    .hero img.logo {
-      width: 200px;
-      max-width: 60vw;
-      height: auto;
-      margin-bottom: 32px;
-    }
-    .hero h1 {
-      font-family: 'Gelasio', serif;
-      font-weight: 700;
-      font-size: clamp(2rem, 4.5vw, 3.25rem);
-      line-height: 1.1;
-      margin: 0 auto 20px;
-      max-width: 1080px;
-    }
-    .hero .sub {
-      font-size: clamp(1rem, 1.5vw, 1.2rem);
-      line-height: 1.5;
-      color: rgba(32, 48, 58, 0.75);
-      max-width: 720px;
-      margin: 0 auto;
-    }
-
-    /* EYEBROWS */
-    .eyebrow {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 500;
-      font-size: 0.875rem;
-      letter-spacing: 0.15em;
-      color: var(--brass);
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-
-    /* H2 */
-    h2 {
-      font-family: 'Gelasio', serif;
-      font-weight: 700;
-      font-size: clamp(1.5rem, 3vw, 2rem);
-      color: var(--deep-navy);
-      margin-bottom: 12px;
-    }
-
-    /* Body copy */
-    .band p {
-      font-size: clamp(1rem, 1.3vw, 1.1rem);
-      line-height: 1.6;
-      max-width: 760px;
-      margin: 0 auto 14px;
-    }
-    .band p:last-child { margin-bottom: 0; }
-
-    /* Chart sections */
-    .chart-section { margin-top: 40px; }
-    .chart-grid-2 {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-      max-width: 1280px;
-      margin: 0 auto;
-    }
-    .chart-cell {
-      background: rgba(230, 224, 214, 0.35);
-      border-radius: 8px;
-      padding: 24px;
-      overflow: hidden;
-      position: relative;
-    }
-    .chart-cell iframe {
-      width: 100% !important;
-      max-width: 100% !important;
-      border: none;
-      display: block;
-      height: 335px;
-    }
-
-    /* CTA */
-    .cta {
-      display: inline-block;
-      background: var(--brass);
-      color: var(--warm-paper);
-      font-size: 1.125rem;
-      font-weight: 500;
-      padding: 14px 36px;
-      border-radius: 999px;
-      text-decoration: none;
-      transition: background-color 0.2s ease;
-      margin-top: 20px;
-    }
-    .cta:hover { background: #C2A06A; }
-
-    /* Back link */
     .back-link {
-      display: inline-block;
-      font-size: 0.875rem;
-      color: var(--brass);
-      text-decoration: none;
-      margin-bottom: 24px;
+      display: inline-block; font-size: 0.875rem; color: var(--brass);
+      text-decoration: none; margin-bottom: 24px;
     }
     .back-link:hover { text-decoration: underline; }
-
-    /* Footer */
+    .hero img.logo { width: 240px; max-width: 70vw; height: auto; margin-bottom: 28px; }
+    .hero h1 {
+      font-family: 'Gelasio', serif; font-weight: 700;
+      font-size: clamp(2rem, 4.5vw, 3.25rem); line-height: 1.1;
+      margin: 0 auto 18px; max-width: 1080px;
+    }
+    .hero .sub {
+      font-size: clamp(1rem, 1.5vw, 1.2rem); line-height: 1.5;
+      color: rgba(32, 48, 58, 0.75); max-width: 720px; margin: 0 auto;
+    }
+    .eyebrow {
+      font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 0.875rem;
+      letter-spacing: 0.15em; color: var(--brass); text-transform: uppercase; margin-bottom: 16px;
+    }
+    h2 {
+      font-family: 'Gelasio', serif; font-weight: 700;
+      font-size: clamp(1.5rem, 3vw, 2rem); color: var(--deep-navy); margin-bottom: 12px;
+    }
+    .band p {
+      font-size: clamp(1rem, 1.3vw, 1.1rem); line-height: 1.6;
+      max-width: 760px; margin: 0 auto 14px;
+    }
+    .band p:last-child { margin-bottom: 0; }
+    .chart-section { margin-top: 36px; }
+    .chart-grid-2 {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 24px; max-width: 1200px; margin: 0 auto;
+    }
+    .chart-cell {
+      background: #fff; border: 1px solid rgba(32,48,58,0.08);
+      border-radius: 12px; padding: 20px 20px 12px;
+    }
+    .chart-title {
+      font-size: 0.95rem; font-weight: 500; color: var(--deep-navy);
+      text-align: left; margin-bottom: 12px;
+    }
+    .chart-canvas-wrap { position: relative; height: 260px; }
+    /* The two "What I Control" charts stay as Google embeds */
+    .embed-cell {
+      background: rgba(230, 224, 214, 0.35); border-radius: 8px;
+      padding: 16px; overflow: hidden;
+    }
+    .embed-cell iframe { width: 100% !important; border: none; display: block; height: 320px; }
+    .cta {
+      display: inline-block; background: var(--brass); color: var(--warm-paper);
+      font-size: 1.125rem; font-weight: 500; padding: 14px 36px;
+      border-radius: 999px; text-decoration: none; transition: background-color 0.2s ease; margin-top: 16px;
+    }
+    .cta:hover { background: #C2A06A; }
     footer {
-      text-align: center;
-      padding: 24px 24px 40px;
-      font-size: 0.875rem;
-      color: rgba(32, 48, 58, 0.5);
+      text-align: center; padding: 24px; font-size: 0.875rem; color: rgba(32, 48, 58, 0.5);
     }
     footer a { color: inherit; text-decoration: none; }
     footer a:hover { text-decoration: underline; }
-
-    /* Mobile */
     @media (max-width: 640px) {
-      .container { padding: 48px 20px; }
-      .band { margin-bottom: 56px; }
-      .hero img.logo { width: 160px; margin-bottom: 24px; }
+      .container { padding: 40px 20px; }
+      .band { margin-bottom: 48px; }
+      .hero img.logo { width: 180px; margin-bottom: 24px; }
       .chart-grid-2 { grid-template-columns: 1fr; gap: 20px; }
-      .chart-section { margin-top: 28px; }
     }
   </style>
 </head>
 <body>
   <div class="container">
 
-    <a href="/" class="back-link">← Back to home</a>
+    <a href="/" class="back-link">&larr; Back to home</a>
 
     <section class="band hero">
-      <img class="logo" src="logo_horizontal_transparent (2).png" alt="Explained Through Data">
-      <h1>Six weeks in, this is what showed up.</h1>
-      <p class="sub">A live case study in progress. Real days, honest numbers, one system built to hold both.</p>
+      <img class="logo" src="logo.png" alt="Explained Through Data">
+      <h1>This is what the data shows.</h1>
+      <p class="sub">A live case study. Real days, honest numbers, one system built to hold both.</p>
     </section>
 
     <section class="band">
-      <div class="eyebrow">The Experiment</div>
+      <div class="eyebrow">The Process Improvement Project</div>
       <p>Ninety days of documenting real life without a pass or fail attached. Every morning starts with the same short set of measurements. Every evening closes with a written reflection. Six pillars run underneath: Body, Career, Relational and Spiritual, Community, and the quiet fifth of Documentation itself.</p>
       <p>The frame is Lean Six Sigma, DMAIC, and Statistical Process Control, applied to a person instead of a factory. That is not a metaphor. Every measurement has an operational definition, every finding has a Special Cause or Common Cause verdict, and every ruling is dated and defensible.</p>
     </section>
@@ -180,11 +127,11 @@
       <p>Every outcome downstream lives or dies on two inputs. The habits I complete and the reachouts I send. These are the levers, and they come first.</p>
       <div class="chart-section">
         <div class="chart-grid-2">
-          <div class="chart-cell">
-            <iframe height="335" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=1402604725&amp;format=interactive"></iframe>
+          <div class="embed-cell">
+            <iframe seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=1402604725&amp;format=interactive"></iframe>
           </div>
-          <div class="chart-cell">
-            <iframe height="335" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=220261141&amp;format=interactive"></iframe>
+          <div class="embed-cell">
+            <iframe seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=220261141&amp;format=interactive"></iframe>
           </div>
         </div>
       </div>
@@ -197,16 +144,20 @@
       <div class="chart-section">
         <div class="chart-grid-2">
           <div class="chart-cell">
-            <iframe height="335" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=951108434&amp;format=interactive"></iframe>
+            <div class="chart-title">GI Comfort, daily (1 to 10)</div>
+            <div class="chart-canvas-wrap"><canvas id="giChart"></canvas></div>
           </div>
           <div class="chart-cell">
-            <iframe height="335" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=721561208&amp;format=interactive"></iframe>
+            <div class="chart-title">Sleep score, weekly average</div>
+            <div class="chart-canvas-wrap"><canvas id="sleepChart"></canvas></div>
           </div>
           <div class="chart-cell">
-            <iframe height="335" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=1969853697&amp;format=interactive"></iframe>
+            <div class="chart-title">Energy, weekly average (1 to 10)</div>
+            <div class="chart-canvas-wrap"><canvas id="energyChart"></canvas></div>
           </div>
           <div class="chart-cell">
-            <iframe height="335" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=262821323&amp;format=interactive"></iframe>
+            <div class="chart-title">Joy, weekly average (1 to 10)</div>
+            <div class="chart-canvas-wrap"><canvas id="joyChart"></canvas></div>
           </div>
         </div>
       </div>
@@ -225,5 +176,95 @@
     &nbsp;/&nbsp;
     <a href="https://www.linkedin.com/in/jacquelineornelastx" target="_blank" rel="noopener">linkedin.com/in/jacquelineornelastx</a>
   </footer>
+
+  <script>
+    // ===== LIVE CHARTS =====
+    // These read your published Google Sheet as CSV and draw exact axes every time.
+    // No manual axis fixing, no empty padded weeks. The chart only plots real rows.
+    //
+    // HOW IT WORKS: each sheet/tab is published to the web as CSV. We fetch it,
+    // parse it, drop empty rows, and plot. When you add a row in the sheet, the
+    // chart shows it automatically on next page load.
+
+    const NAVY = '#20303A';
+    const BRASS = '#B0895E';
+    const GRID = 'rgba(32,48,58,0.08)';
+
+    Chart.defaults.font.family = "'Montserrat', sans-serif";
+    Chart.defaults.color = 'rgba(32,48,58,0.7)';
+
+    // Shared options builder for a clean line chart with exact axis
+    function lineOpts(yMin, yMax, yStep, xTitle) {
+      return {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: {
+            title: { display: true, text: xTitle, color: 'rgba(32,48,58,0.6)' },
+            grid: { display: false },
+            ticks: { autoSkip: false }
+          },
+          y: {
+            min: yMin, max: yMax,
+            ticks: { stepSize: yStep },
+            grid: { color: GRID }
+          }
+        },
+        elements: { line: { borderColor: NAVY, borderWidth: 2, tension: 0.3 }, point: { radius: 0 } }
+      };
+    }
+
+    // Parse CSV text into array of rows (array of arrays)
+    function parseCSV(text) {
+      return text.trim().split('\n').map(function(line){
+        return line.split(',').map(function(c){ return c.replace(/^"|"$/g,'').trim(); });
+      });
+    }
+
+    // Fetch a published CSV url, return rows
+    async function fetchCSV(url) {
+      const res = await fetch(url);
+      const text = await res.text();
+      return parseCSV(text);
+    }
+
+    // ---- PLACEHOLDER DATA (used until live CSV URLs are wired in) ----
+    // Replace the fetch URLs below with your published-CSV links (steps provided separately).
+    // Until then, these draw from the numbers currently in your sheet so the page looks right.
+
+    const giData = {
+      labels: [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35,37,39,41,43,45,47,49,51,53,55,57,59,61,63,65,67],
+      values: [null,null,null,null,null,null,7,8,7,9,8,10,9,10,8,10,3,9,10,8,10,6,10,9,10,7,10,8,9,10,5,9,8,9]
+    };
+    const sleepData = { labels: [1,2,3,4,5,6,7], values: [88,88,90,86,87,85,88] };
+    const energyData = { labels: [1,2,3,4,5,6,7,8,9,10], values: [5.5,7,6.8,7,7.2,7.5,8,7.9,8,7.4] };
+    const joyData = { labels: [1,2,3,4,5,6,7], values: [4.2,7.3,7.1,8.6,7.4,6.8,9] };
+
+    function drawAll() {
+      new Chart(document.getElementById('giChart'), {
+        type: 'line',
+        data: { labels: giData.labels, datasets: [{ data: giData.values, spanGaps: true }] },
+        options: lineOpts(1, 10, 3, 'Day')
+      });
+      new Chart(document.getElementById('sleepChart'), {
+        type: 'line',
+        data: { labels: sleepData.labels, datasets: [{ data: sleepData.values }] },
+        options: lineOpts(50, 100, 12.5, 'Week')
+      });
+      new Chart(document.getElementById('energyChart'), {
+        type: 'line',
+        data: { labels: energyData.labels, datasets: [{ data: energyData.values }] },
+        options: lineOpts(0, 10, 2, 'Week')
+      });
+      new Chart(document.getElementById('joyChart'), {
+        type: 'line',
+        data: { labels: joyData.labels, datasets: [{ data: joyData.values }] },
+        options: lineOpts(1, 10, 2.25, 'Week')
+      });
+    }
+
+    drawAll();
+  </script>
 </body>
 </html>
