@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PDDWPMZY8G"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -21,98 +20,72 @@
   <link href="https://fonts.googleapis.com/css2?family=Gelasio:wght@700&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   <style>
-    :root {
-      --warm-paper: #FAF8F5;
-      --deep-navy: #20303A;
-      --brass: #B0895E;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--warm-paper);
-      color: var(--deep-navy);
-      font-family: 'Montserrat', sans-serif;
-      line-height: 1.6;
-    }
-    .container { max-width: 1240px; margin: 0 auto; padding: 48px 24px; }
-    .band { margin-bottom: 64px; text-align: center; }
-    .band:last-of-type { margin-bottom: 0; }
-    .back-link {
-      display: inline-block; font-size: 0.875rem; color: var(--brass);
-      text-decoration: none; margin-bottom: 24px;
-    }
-    .back-link:hover { text-decoration: underline; }
-    .hero img.logo { width: 240px; max-width: 70vw; height: auto; margin-bottom: 28px; }
+    :root { --warm-paper:#FAF8F5; --deep-navy:#20303A; --brass:#B0895E; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { background:var(--warm-paper); color:var(--deep-navy); font-family:'Montserrat',sans-serif; line-height:1.6; }
+    .container { max-width:1240px; margin:0 auto; padding:24px 24px 48px; }
+    nav { display:flex; justify-content:space-between; padding:0 0 24px; font-size:0.9rem; }
+    nav a { color:var(--deep-navy); text-decoration:none; opacity:0.75; }
+    nav a:hover { opacity:1; color:var(--brass); }
+    .band { margin-bottom:64px; text-align:center; }
+    .band:last-of-type { margin-bottom:0; }
+    .hero img.logo { width:300px; max-width:78vw; height:auto; margin-bottom:10px; }
+    .tagline { font-size:0.95rem; letter-spacing:0.06em; color:var(--brass); margin-bottom:30px; }
     .hero h1 {
-      font-family: 'Gelasio', serif; font-weight: 700;
-      font-size: clamp(2rem, 4.5vw, 3.25rem); line-height: 1.1;
-      margin: 0 auto 18px; max-width: 1080px;
+      font-family:'Gelasio',serif; font-weight:700;
+      font-size:clamp(2rem,4.5vw,3.25rem); line-height:1.1;
+      margin:0 auto 18px; max-width:1080px;
     }
-    .hero .sub {
-      font-size: clamp(1rem, 1.5vw, 1.2rem); line-height: 1.5;
-      color: rgba(32, 48, 58, 0.75); max-width: 720px; margin: 0 auto;
-    }
+    .hero .sub { font-size:clamp(1rem,1.5vw,1.2rem); line-height:1.55; color:rgba(32,48,58,0.75); max-width:720px; margin:0 auto; }
     .eyebrow {
-      font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 0.875rem;
-      letter-spacing: 0.15em; color: var(--brass); text-transform: uppercase; margin-bottom: 16px;
+      font-weight:500; font-size:0.875rem; letter-spacing:0.15em;
+      color:var(--brass); text-transform:uppercase; margin-bottom:16px;
     }
-    h2 {
-      font-family: 'Gelasio', serif; font-weight: 700;
-      font-size: clamp(1.5rem, 3vw, 2rem); color: var(--deep-navy); margin-bottom: 12px;
-    }
-    .band p {
-      font-size: clamp(1rem, 1.3vw, 1.1rem); line-height: 1.6;
-      max-width: 760px; margin: 0 auto 14px;
-    }
-    .band p:last-child { margin-bottom: 0; }
-    .chart-section { margin-top: 36px; }
-    .chart-grid-2 {
-      display: grid; grid-template-columns: repeat(2, 1fr);
-      gap: 24px; max-width: 1200px; margin: 0 auto;
+    h2 { font-family:'Gelasio',serif; font-weight:700; font-size:clamp(1.5rem,3vw,2rem); margin-bottom:12px; }
+    .band p { font-size:clamp(1rem,1.3vw,1.1rem); max-width:760px; margin:0 auto 14px; }
+    .band p:last-child { margin-bottom:0; }
+    .chart-section { margin-top:36px; }
+    .chart-grid {
+      display:grid; grid-template-columns:repeat(2,1fr);
+      gap:24px; max-width:1200px; margin:0 auto;
     }
     .chart-cell {
-      background: #fff; border: 1px solid rgba(32,48,58,0.08);
-      border-radius: 12px; padding: 20px 20px 12px;
+      background:#fff; border:1px solid rgba(32,48,58,0.10);
+      border-radius:12px; padding:20px;
     }
-    .chart-title {
-      font-size: 0.95rem; font-weight: 500; color: var(--deep-navy);
-      text-align: left; margin-bottom: 12px;
-    }
-    .chart-canvas-wrap { position: relative; height: 260px; }
-    /* The two "What I Control" charts stay as Google embeds */
-    .embed-cell {
-      background: rgba(230, 224, 214, 0.35); border-radius: 8px;
-      padding: 16px; overflow: hidden;
-    }
-    .embed-cell iframe { width: 100% !important; border: none; display: block; height: 320px; }
+    .chart-title { font-size:0.95rem; font-weight:500; text-align:left; margin-bottom:14px; }
+    .chart-wrap { position:relative; height:270px; }
     .cta {
-      display: inline-block; background: var(--brass); color: var(--warm-paper);
-      font-size: 1.125rem; font-weight: 500; padding: 14px 36px;
-      border-radius: 999px; text-decoration: none; transition: background-color 0.2s ease; margin-top: 16px;
+      display:inline-block; background:var(--brass); color:var(--warm-paper);
+      font-size:1.125rem; font-weight:500; padding:14px 36px;
+      border-radius:999px; text-decoration:none; transition:background-color .2s ease; margin-top:16px;
     }
-    .cta:hover { background: #C2A06A; }
-    footer {
-      text-align: center; padding: 24px; font-size: 0.875rem; color: rgba(32, 48, 58, 0.5);
-    }
-    footer a { color: inherit; text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
-    @media (max-width: 640px) {
-      .container { padding: 40px 20px; }
-      .band { margin-bottom: 48px; }
-      .hero img.logo { width: 180px; margin-bottom: 24px; }
-      .chart-grid-2 { grid-template-columns: 1fr; gap: 20px; }
+    .cta:hover { background:#C2A06A; }
+    footer { text-align:center; padding:24px; font-size:0.875rem; color:rgba(32,48,58,0.5); }
+    footer a { color:inherit; text-decoration:none; }
+    footer a:hover { text-decoration:underline; }
+    @media (max-width:640px) {
+      .container { padding:20px 20px 40px; }
+      .band { margin-bottom:48px; }
+      .hero img.logo { width:230px; }
+      .chart-grid { grid-template-columns:1fr; gap:20px; }
+      .chart-wrap { height:240px; }
     }
   </style>
 </head>
 <body>
   <div class="container">
-
-    <a href="/" class="back-link">&larr; Back to home</a>
+    <nav>
+      <a href="/">&larr; Home</a>
+      <a href="mailto:ThisIsMe@ExplainedThroughData.com">Contact</a>
+    </nav>
 
     <section class="band hero">
       <img class="logo" src="logo.png" alt="Explained Through Data">
+      <div class="tagline">This is me, explained through data.</div>
       <h1>This is what the data shows.</h1>
-      <p class="sub">A live case study. Real days, honest numbers, one system built to hold both.</p>
+      <p class="sub">A live case study, June 7 to September 4, 2026.<br>Real days, honest numbers, one system built to hold both.</p>
     </section>
 
     <section class="band">
@@ -126,12 +99,14 @@
       <h2>The engine and the funnel.</h2>
       <p>Every outcome downstream lives or dies on two inputs. The habits I complete and the reachouts I send. These are the levers, and they come first.</p>
       <div class="chart-section">
-        <div class="chart-grid-2">
-          <div class="embed-cell">
-            <iframe seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=1402604725&amp;format=interactive"></iframe>
+        <div class="chart-grid">
+          <div class="chart-cell">
+            <div class="chart-title">The engine: habit completion by week</div>
+            <div class="chart-wrap"><canvas id="engineChart"></canvas></div>
           </div>
-          <div class="embed-cell">
-            <iframe seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pubchart?oid=220261141&amp;format=interactive"></iframe>
+          <div class="chart-cell">
+            <div class="chart-title">The funnel: applications, outreach, responses, interviews</div>
+            <div class="chart-wrap"><canvas id="funnelChart"></canvas></div>
           </div>
         </div>
       </div>
@@ -142,22 +117,22 @@
       <h2>The outcomes, four ways.</h2>
       <p>These are lagging indicators. They tell the truth about what the inputs are doing, sometimes on delay, always honestly.</p>
       <div class="chart-section">
-        <div class="chart-grid-2">
+        <div class="chart-grid">
           <div class="chart-cell">
             <div class="chart-title">GI Comfort, daily (1 to 10)</div>
-            <div class="chart-canvas-wrap"><canvas id="giChart"></canvas></div>
+            <div class="chart-wrap"><canvas id="giChart"></canvas></div>
           </div>
           <div class="chart-cell">
             <div class="chart-title">Sleep score, weekly average</div>
-            <div class="chart-canvas-wrap"><canvas id="sleepChart"></canvas></div>
+            <div class="chart-wrap"><canvas id="sleepChart"></canvas></div>
           </div>
           <div class="chart-cell">
             <div class="chart-title">Energy, weekly average (1 to 10)</div>
-            <div class="chart-canvas-wrap"><canvas id="energyChart"></canvas></div>
+            <div class="chart-wrap"><canvas id="energyChart"></canvas></div>
           </div>
           <div class="chart-cell">
             <div class="chart-title">Joy, weekly average (1 to 10)</div>
-            <div class="chart-canvas-wrap"><canvas id="joyChart"></canvas></div>
+            <div class="chart-wrap"><canvas id="joyChart"></canvas></div>
           </div>
         </div>
       </div>
@@ -168,7 +143,6 @@
       <p>Reach me if you'd like to talk about what this looks like inside client experience, account management, or a role where measured care matters.</p>
       <a class="cta" href="mailto:ThisIsMe@ExplainedThroughData.com">Get in touch</a>
     </section>
-
   </div>
 
   <footer>
@@ -178,93 +152,157 @@
   </footer>
 
   <script>
-    // ===== LIVE CHARTS =====
-    // These read your published Google Sheet as CSV and draw exact axes every time.
-    // No manual axis fixing, no empty padded weeks. The chart only plots real rows.
-    //
-    // HOW IT WORKS: each sheet/tab is published to the web as CSV. We fetch it,
-    // parse it, drop empty rows, and plot. When you add a row in the sheet, the
-    // chart shows it automatically on next page load.
+  // ================= LIVE DATA SYSTEM =================
+  // The time axis derives from the calendar itself: zero maintenance, always current.
+  // Data: tries the published-CSV feed first (paste URLs below once published).
+  // Until then it uses the FALLBACK arrays. Only documented values appear; unknown = null.
 
-    const NAVY = '#20303A';
-    const BRASS = '#B0895E';
-    const GRID = 'rgba(32,48,58,0.08)';
+  var PROJECT_START = new Date('2026-06-07T00:00:00');
+  var now = new Date();
+  var CURRENT_DAY = Math.floor((now - PROJECT_START) / 86400000) + 1;
+  var CURRENT_WEEK = Math.ceil(CURRENT_DAY / 7);
 
-    Chart.defaults.font.family = "'Montserrat', sans-serif";
-    Chart.defaults.color = 'rgba(32,48,58,0.7)';
+  // ---- PASTE PUBLISHED-CSV LINKS HERE (File > Share > Publish to web > choose tab > CSV) ----
+  var CSV = {
+    weekly: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pub?gid=536442748&single=true&output=csv",
+    career: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pub?gid=1049940025&single=true&output=csv",
+    daily:  "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pub?gid=398983613&single=true&output=csv"
+  };
 
-    // Shared options builder for a clean line chart with exact axis
-    function lineOpts(yMin, yMax, yStep, xTitle) {
-      return {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
-        scales: {
-          x: {
-            title: { display: true, text: xTitle, color: 'rgba(32,48,58,0.6)' },
-            grid: { display: false },
-            ticks: { autoSkip: false }
-          },
-          y: {
-            min: yMin, max: yMax,
-            ticks: { stepSize: yStep },
-            grid: { color: GRID }
-          }
-        },
-        elements: { line: { borderColor: NAVY, borderWidth: 2, tension: 0.3 }, point: { radius: 0 } }
-      };
-    }
+  // ---- FALLBACK DATA (real values from project records; null = not yet entered here) ----
+  var FALLBACK = {
+    habitPct: [47, 48, 71, 58, 64, null, null, null, null, null],
+    apps:     [0,0,0,0,0,0,0,0,0,0],
+    cold:     [0,0,0,0,0,0,0,0,0,0],
+    resp:     [0,1,0,1,0,3,1,1,0,0],
+    ints:     [0,0,0,0,0,0,0,0,0,0],
+    sleepWk:  [88,88,90,86,87,85,88,null,null,null],
+    energyWk: [5.5,7,6.8,7,7.2,7.5,8,7.9,8,7.4],
+    joyWk:    [4.2,7.3,7.1,8.6,7.4,6.8,9,null,null,null],
+    giByDay:  { 27:3, 48:6, 58:5, 61:9 }
+  };
 
-    // Parse CSV text into array of rows (array of arrays)
-    function parseCSV(text) {
-      return text.trim().split('\n').map(function(line){
-        return line.split(',').map(function(c){ return c.replace(/^"|"$/g,'').trim(); });
-      });
-    }
+  var NAVY='#20303A', BRASS='#B0895E', SLATE='#5C7080', TAN='#C2A06A';
+  Chart.defaults.font.family = "'Montserrat', sans-serif";
+  Chart.defaults.color = 'rgba(32,48,58,0.7)';
 
-    // Fetch a published CSV url, return rows
-    async function fetchCSV(url) {
-      const res = await fetch(url);
-      const text = await res.text();
-      return parseCSV(text);
-    }
+  function weekLabels(){ var a=[]; for(var i=1;i<=CURRENT_WEEK;i++)a.push(i); return a; }
+  function dayLabels(){ var a=[]; for(var i=1;i<=CURRENT_DAY;i++)a.push(i); return a; }
+  function padTo(arr,n){ var out=arr.slice(0,n); while(out.length<n)out.push(null); return out; }
 
-    // ---- PLACEHOLDER DATA (used until live CSV URLs are wired in) ----
-    // Replace the fetch URLs below with your published-CSV links (steps provided separately).
-    // Until then, these draw from the numbers currently in your sheet so the page looks right.
-
-    const giData = {
-      labels: [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35,37,39,41,43,45,47,49,51,53,55,57,59,61,63,65,67],
-      values: [null,null,null,null,null,null,7,8,7,9,8,10,9,10,8,10,3,9,10,8,10,6,10,9,10,7,10,8,9,10,5,9,8,9]
+  function pctAxis(min,max,step){
+    return { min:min, max:max, ticks:{ stepSize:step, callback:function(v){return v+'%';} }, grid:{color:'rgba(32,48,58,0.08)'} };
+  }
+  function numAxis(min,max,step){
+    return { min:min, max:max, ticks:{ stepSize:step }, grid:{color:'rgba(32,48,58,0.08)'} };
+  }
+  function xAxis(title,every){
+    return {
+      title:{display:true,text:title,color:'rgba(32,48,58,0.6)'},
+      grid:{display:false},
+      ticks:{ autoSkip:false, callback:function(val,idx){ var lab=this.getLabelForValue(val); return (lab % every === 0 || lab === 1) ? lab : ''; } }
     };
-    const sleepData = { labels: [1,2,3,4,5,6,7], values: [88,88,90,86,87,85,88] };
-    const energyData = { labels: [1,2,3,4,5,6,7,8,9,10], values: [5.5,7,6.8,7,7.2,7.5,8,7.9,8,7.4] };
-    const joyData = { labels: [1,2,3,4,5,6,7], values: [4.2,7.3,7.1,8.6,7.4,6.8,9] };
+  }
+  function baseOpts(){ return { responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}} }; }
 
-    function drawAll() {
-      new Chart(document.getElementById('giChart'), {
-        type: 'line',
-        data: { labels: giData.labels, datasets: [{ data: giData.values, spanGaps: true }] },
-        options: lineOpts(1, 10, 3, 'Day')
-      });
-      new Chart(document.getElementById('sleepChart'), {
-        type: 'line',
-        data: { labels: sleepData.labels, datasets: [{ data: sleepData.values }] },
-        options: lineOpts(50, 100, 12.5, 'Week')
-      });
-      new Chart(document.getElementById('energyChart'), {
-        type: 'line',
-        data: { labels: energyData.labels, datasets: [{ data: energyData.values }] },
-        options: lineOpts(0, 10, 2, 'Week')
-      });
-      new Chart(document.getElementById('joyChart'), {
-        type: 'line',
-        data: { labels: joyData.labels, datasets: [{ data: joyData.values }] },
-        options: lineOpts(1, 10, 2.25, 'Week')
+  function draw(data){
+    var wl = weekLabels();
+
+    new Chart(document.getElementById('engineChart'), {
+      type:'bar',
+      data:{ labels:wl, datasets:[{ data:padTo(data.habitPct,CURRENT_WEEK), backgroundColor:NAVY, borderRadius:3 }] },
+      options:Object.assign(baseOpts(),{ scales:{ x:xAxis('Week',1), y:pctAxis(0,100,25) } })
+    });
+
+    var fOpts = baseOpts();
+    fOpts.plugins = { legend:{ display:true, position:'top', labels:{ boxWidth:12, font:{size:11} } } };
+    fOpts.scales = { x:xAxis('Week',1), y:numAxis(0,4,1) };
+    new Chart(document.getElementById('funnelChart'), {
+      type:'bar',
+      data:{ labels:wl, datasets:[
+        { label:'Applications', data:padTo(data.apps,CURRENT_WEEK), backgroundColor:NAVY },
+        { label:'Cold outreach', data:padTo(data.cold,CURRENT_WEEK), backgroundColor:SLATE },
+        { label:'Responses', data:padTo(data.resp,CURRENT_WEEK), backgroundColor:BRASS },
+        { label:'Interviews', data:padTo(data.ints,CURRENT_WEEK), backgroundColor:TAN }
+      ]},
+      options:fOpts
+    });
+
+    var giArr = [];
+    for (var d=1; d<=CURRENT_DAY; d++) giArr.push(data.giByDay[d] !== undefined ? data.giByDay[d] : null);
+    new Chart(document.getElementById('giChart'), {
+      type:'line',
+      data:{ labels:dayLabels(), datasets:[{ data:giArr, borderColor:NAVY, borderWidth:2, pointRadius:2, pointBackgroundColor:NAVY, spanGaps:true, tension:0.3 }] },
+      options:Object.assign(baseOpts(),{ scales:{ x:xAxis('Day',7), y:numAxis(0,10,2) } })
+    });
+
+    function lineChart(id, arr, yopts){
+      new Chart(document.getElementById(id), {
+        type:'line',
+        data:{ labels:wl, datasets:[{ data:padTo(arr,CURRENT_WEEK), borderColor:NAVY, borderWidth:2, pointRadius:2, pointBackgroundColor:NAVY, spanGaps:true, tension:0.3 }] },
+        options:Object.assign(baseOpts(),{ scales:{ x:xAxis('Week',1), y:yopts } })
       });
     }
+    lineChart('sleepChart',  data.sleepWk,  pctAxis(50,100,10));
+    lineChart('energyChart', data.energyWk, numAxis(0,10,2));
+    lineChart('joyChart',    data.joyWk,    numAxis(0,10,2));
+  }
 
-    drawAll();
+  // ---- CSV live-feed loader with graceful fallback ----
+  function parseCSV(text){
+    var rows = [], row = [], cur = '', inQ = false;
+    for (var i = 0; i < text.length; i++) {
+      var ch = text[i];
+      if (inQ) {
+        if (ch === '"') {
+          if (text[i+1] === '"') { cur += '"'; i++; }
+          else inQ = false;
+        } else cur += ch;
+      } else {
+        if (ch === '"') inQ = true;
+        else if (ch === ',') { row.push(cur.trim()); cur = ''; }
+        else if (ch === '\n' || ch === '\r') {
+          if (ch === '\r' && text[i+1] === '\n') i++;
+          row.push(cur.trim()); cur = '';
+          if (row.length > 1 || row[0] !== '') rows.push(row);
+          row = [];
+        } else cur += ch;
+      }
+    }
+    if (cur !== '' || row.length) { row.push(cur.trim()); rows.push(row); }
+    return rows;
+  }
+  function col(rows, header){
+    var idx = rows[0].findIndex(function(hcell){ return hcell.toLowerCase().indexOf(header.toLowerCase()) !== -1; });
+    if (idx === -1) return null;
+    return rows.slice(1).map(function(r){ var v = parseFloat(r[idx]); return isNaN(v) ? null : v; });
+  }
+  async function loadLive(){
+    var data = JSON.parse(JSON.stringify(FALLBACK));
+    try {
+      if (CSV.weekly) {
+        var wres = await fetch(CSV.weekly); var wrows = parseCSV(await wres.text());
+        data.habitPct = col(wrows,'Habit') || data.habitPct;
+        data.sleepWk  = col(wrows,'Sleep') || data.sleepWk;
+        data.energyWk = col(wrows,'Energy') || data.energyWk;
+        data.joyWk    = col(wrows,'Joy') || data.joyWk;
+      }
+      if (CSV.career) {
+        var cres = await fetch(CSV.career); var crows = parseCSV(await cres.text());
+        data.apps = col(crows,'Application') || data.apps;
+        data.cold = col(crows,'Cold') || data.cold;
+        data.resp = col(crows,'Response') || data.resp;
+        data.ints = col(crows,'Interview') || data.ints;
+      }
+      if (CSV.daily) {
+        var dres = await fetch(CSV.daily); var drows = parseCSV(await dres.text());
+        var days = col(drows,'Day'); var gi = col(drows,'GI');
+        if (days && gi) { var m={}; days.forEach(function(dv,i){ if(dv!==null && gi[i]!==null) m[dv]=gi[i]; }); data.giByDay=m; }
+      }
+    } catch(e) { /* fall back silently to embedded data */ }
+    draw(data);
+  }
+  loadLive();
   </script>
 </body>
 </html>
