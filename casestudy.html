@@ -150,34 +150,31 @@
   </footer>
 
   <script>
-  // ================= LIVE DATA SYSTEM =================
-  // The time axis derives from the calendar itself: zero maintenance, always current.
-  // Data: tries the published-CSV feed first (paste URLs below once published).
-  // Until then it uses the FALLBACK arrays. Only documented values appear; unknown = null.
+  // ================= LIVE DATA SYSTEM (date-aware) =================
+  // Time axis derives from the calendar. Data reads live from published CSV.
+  // GI Comfort is keyed by DATE (converted to project day), because the Daily
+  // Log has a Date column, not a day-number column. Weekly charts key by row order.
 
   var PROJECT_START = new Date('2026-06-07T00:00:00');
   var now = new Date();
   var CURRENT_DAY = Math.floor((now - PROJECT_START) / 86400000) + 1;
   var CURRENT_WEEK = Math.ceil(CURRENT_DAY / 7);
 
-  // ---- PASTE PUBLISHED-CSV LINKS HERE (File > Share > Publish to web > choose tab > CSV) ----
   var CSV = {
     weekly: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pub?gid=536442748&single=true&output=csv",
     career: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pub?gid=1049940025&single=true&output=csv",
     daily:  "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOzBwmwQDbcIg4Oyc2i3oS2xEC1vPuO1x7L_q8ihoFAEGVET7LW2SRP8qYFYIHfgfwLmiP7aHpsQA_/pub?gid=398983613&single=true&output=csv"
   };
 
-  // ---- FALLBACK DATA (real values from project records; null = not yet entered here) ----
+  // Fallback: only real, verified values. Null = not plotted.
   var FALLBACK = {
-    habitPct: [47, 48, 71, 58, 64, null, null, null, null, null],
-    apps:     [0,0,0,0,0,0,0,0,0,0],
-    cold:     [0,0,0,0,0,0,0,0,0,0],
-    resp:     [0,1,0,1,0,3,1,1,0,0],
-    ints:     [0,0,0,0,0,0,0,0,0,0],
-    sleepWk:  [88,88,90,86,87,85,88,null,null,null],
-    energyWk: [5.5,7,6.8,7,7.2,7.5,8,7.9,8,7.4],
-    joyWk:    [4.2,7.3,7.1,8.6,7.4,6.8,9,null,null,null],
-    giByDay:  { 27:3, 48:6, 58:5, 61:9 }
+    habitPct: [47, 48, 71, 58, 64],
+    apps: [], cold: [], resp: [0,1,0,1,0,3,1,1],
+    ints: [],
+    sleepWk: [88,88,90,86,87,85,88],
+    energyWk: [5.5,7,6.8,7,7.2,7.5,8,7.9,8,7.4,8],
+    joyWk: [4.2,7.3,7.1,8.6,7.4,6.8,9],
+    giByDay: { 27:3, 48:6, 58:5, 61:9 }
   };
 
   var NAVY='#20303A', BRASS='#B0895E', SLATE='#5C7080', TAN='#C2A06A';
@@ -187,117 +184,95 @@
   function weekLabels(){ var a=[]; for(var i=1;i<=CURRENT_WEEK;i++)a.push(i); return a; }
   function dayLabels(){ var a=[]; for(var i=1;i<=CURRENT_DAY;i++)a.push(i); return a; }
   function padTo(arr,n){ var out=arr.slice(0,n); while(out.length<n)out.push(null); return out; }
+  function pctAxis(min,max,step){ return { min:min, max:max, ticks:{ stepSize:step, callback:function(v){return v+'%';} }, grid:{color:'rgba(32,48,58,0.08)'} }; }
+  function numAxis(min,max,step){ return { min:min, max:max, ticks:{ stepSize:step }, grid:{color:'rgba(32,48,58,0.08)'} }; }
+  function xAxis(title,every){ return { title:{display:true,text:title,color:'rgba(32,48,58,0.6)'}, grid:{display:false}, ticks:{ autoSkip:false, maxRotation:0, callback:function(val){ var lab=this.getLabelForValue(val); return (lab % every === 0 || lab === 1) ? lab : ''; } } }; }
+  function baseOpts(){ return { responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, animation:false }; }
 
-  function pctAxis(min,max,step){
-    return { min:min, max:max, ticks:{ stepSize:step, callback:function(v){return v+'%';} }, grid:{color:'rgba(32,48,58,0.08)'} };
+  // Robust CSV parser (handles quoted commas + newlines in reflection columns)
+  function parseCSV(text){
+    var rows=[],row=[],cur='',inQ=false;
+    for(var i=0;i<text.length;i++){var ch=text[i];
+      if(inQ){ if(ch==='"'){ if(text[i+1]==='"'){cur+='"';i++;} else inQ=false; } else cur+=ch; }
+      else{ if(ch==='"')inQ=true; else if(ch===','){row.push(cur.trim());cur='';}
+        else if(ch==='\n'||ch==='\r'){ if(ch==='\r'&&text[i+1]==='\n')i++; row.push(cur.trim());cur=''; if(row.length>1||row[0]!=='')rows.push(row); row=[]; }
+        else cur+=ch; } }
+    if(cur!==''||row.length){row.push(cur.trim());rows.push(row);}
+    return rows;
   }
-  function numAxis(min,max,step){
-    return { min:min, max:max, ticks:{ stepSize:step }, grid:{color:'rgba(32,48,58,0.08)'} };
+  function colIndex(header, needle){ return header.findIndex(function(h){ return h.toLowerCase().indexOf(needle.toLowerCase())!==-1; }); }
+  function numColByIndex(rows, idx){ if(idx<0)return null; return rows.slice(1).map(function(r){ var v=parseFloat(r[idx]); return isNaN(v)?null:v; }); }
+
+  function dateToDay(str){
+    var d = new Date(str);
+    if (isNaN(d)) return null;
+    return Math.floor((d - PROJECT_START)/86400000) + 1;
   }
-  function xAxis(title,every){
-    return {
-      title:{display:true,text:title,color:'rgba(32,48,58,0.6)'},
-      grid:{display:false},
-      ticks:{ autoSkip:false, callback:function(val,idx){ var lab=this.getLabelForValue(val); return (lab % every === 0 || lab === 1) ? lab : ''; } }
-    };
-  }
-  function baseOpts(){ return { responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}} }; }
 
   function draw(data){
     var wl = weekLabels();
-
     new Chart(document.getElementById('engineChart'), {
-      type:'bar',
-      data:{ labels:wl, datasets:[{ data:padTo(data.habitPct,CURRENT_WEEK), backgroundColor:NAVY, borderRadius:3 }] },
+      type:'bar', data:{ labels:wl, datasets:[{ data:padTo(data.habitPct,CURRENT_WEEK), backgroundColor:NAVY, borderRadius:3 }] },
       options:Object.assign(baseOpts(),{ scales:{ x:xAxis('Week',1), y:pctAxis(0,100,25) } })
     });
-
-    var fOpts = baseOpts();
-    fOpts.plugins = { legend:{ display:true, position:'top', labels:{ boxWidth:12, font:{size:11} } } };
-    fOpts.scales = { x:xAxis('Week',1), y:numAxis(0,4,1) };
+    var fOpts=baseOpts(); fOpts.plugins={ legend:{ display:true, position:'top', labels:{ boxWidth:12, font:{size:11} } } };
+    fOpts.scales={ x:xAxis('Week',1), y:numAxis(0,4,1) };
     new Chart(document.getElementById('funnelChart'), {
-      type:'bar',
-      data:{ labels:wl, datasets:[
+      type:'bar', data:{ labels:wl, datasets:[
         { label:'Applications', data:padTo(data.apps,CURRENT_WEEK), backgroundColor:NAVY },
         { label:'Cold outreach', data:padTo(data.cold,CURRENT_WEEK), backgroundColor:SLATE },
         { label:'Responses', data:padTo(data.resp,CURRENT_WEEK), backgroundColor:BRASS },
-        { label:'Interviews', data:padTo(data.ints,CURRENT_WEEK), backgroundColor:TAN }
-      ]},
+        { label:'Interviews', data:padTo(data.ints,CURRENT_WEEK), backgroundColor:TAN } ]},
       options:fOpts
     });
-
-    var giArr = [];
-    for (var d=1; d<=CURRENT_DAY; d++) giArr.push(data.giByDay[d] !== undefined ? data.giByDay[d] : null);
+    var giArr=[]; for(var d=1; d<=CURRENT_DAY; d++) giArr.push(data.giByDay[d]!==undefined?data.giByDay[d]:null);
     new Chart(document.getElementById('giChart'), {
-      type:'line',
-      data:{ labels:dayLabels(), datasets:[{ data:giArr, borderColor:NAVY, borderWidth:2, pointRadius:2, pointBackgroundColor:NAVY, spanGaps:true, tension:0.3 }] },
+      type:'line', data:{ labels:dayLabels(), datasets:[{ data:giArr, borderColor:NAVY, borderWidth:2, pointRadius:2, pointBackgroundColor:NAVY, spanGaps:true, tension:0.3 }] },
       options:Object.assign(baseOpts(),{ scales:{ x:xAxis('Day',7), y:numAxis(0,10,2) } })
     });
-
-    function lineChart(id, arr, yopts){
-      new Chart(document.getElementById(id), {
-        type:'line',
-        data:{ labels:wl, datasets:[{ data:padTo(arr,CURRENT_WEEK), borderColor:NAVY, borderWidth:2, pointRadius:2, pointBackgroundColor:NAVY, spanGaps:true, tension:0.3 }] },
-        options:Object.assign(baseOpts(),{ scales:{ x:xAxis('Week',1), y:yopts } })
-      });
-    }
-    lineChart('sleepChart',  data.sleepWk,  pctAxis(50,100,10));
+    function lineChart(id,arr,yopts){ new Chart(document.getElementById(id), {
+      type:'line', data:{ labels:wl, datasets:[{ data:padTo(arr,CURRENT_WEEK), borderColor:NAVY, borderWidth:2, pointRadius:2, pointBackgroundColor:NAVY, spanGaps:true, tension:0.3 }] },
+      options:Object.assign(baseOpts(),{ scales:{ x:xAxis('Week',1), y:yopts } }) }); }
+    lineChart('sleepChart', data.sleepWk, pctAxis(50,100,10));
     lineChart('energyChart', data.energyWk, numAxis(0,10,2));
-    lineChart('joyChart',    data.joyWk,    numAxis(0,10,2));
+    lineChart('joyChart', data.joyWk, numAxis(0,10,2));
   }
 
-  // ---- CSV live-feed loader with graceful fallback ----
-  function parseCSV(text){
-    var rows = [], row = [], cur = '', inQ = false;
-    for (var i = 0; i < text.length; i++) {
-      var ch = text[i];
-      if (inQ) {
-        if (ch === '"') {
-          if (text[i+1] === '"') { cur += '"'; i++; }
-          else inQ = false;
-        } else cur += ch;
-      } else {
-        if (ch === '"') inQ = true;
-        else if (ch === ',') { row.push(cur.trim()); cur = ''; }
-        else if (ch === '\n' || ch === '\r') {
-          if (ch === '\r' && text[i+1] === '\n') i++;
-          row.push(cur.trim()); cur = '';
-          if (row.length > 1 || row[0] !== '') rows.push(row);
-          row = [];
-        } else cur += ch;
-      }
-    }
-    if (cur !== '' || row.length) { row.push(cur.trim()); rows.push(row); }
-    return rows;
-  }
-  function col(rows, header){
-    var idx = rows[0].findIndex(function(hcell){ return hcell.toLowerCase().indexOf(header.toLowerCase()) !== -1; });
-    if (idx === -1) return null;
-    return rows.slice(1).map(function(r){ var v = parseFloat(r[idx]); return isNaN(v) ? null : v; });
-  }
   async function loadLive(){
     var data = JSON.parse(JSON.stringify(FALLBACK));
     try {
-      if (CSV.weekly) {
-        var wres = await fetch(CSV.weekly); var wrows = parseCSV(await wres.text());
-        data.habitPct = col(wrows,'Habit') || data.habitPct;
-        data.sleepWk  = col(wrows,'Sleep') || data.sleepWk;
-        data.energyWk = col(wrows,'Energy') || data.energyWk;
-        data.joyWk    = col(wrows,'Joy') || data.joyWk;
+      if (CSV.weekly){
+        var wr = parseCSV(await (await fetch(CSV.weekly)).text());
+        var h = wr[0];
+        var hi = numColByIndex(wr, colIndex(h,'Habit')); if(hi) data.habitPct = hi;
+        var si = numColByIndex(wr, colIndex(h,'Sleep')); if(si) data.sleepWk = si;
+        var ei = numColByIndex(wr, colIndex(h,'Energy')); if(ei) data.energyWk = ei;
+        var ji = numColByIndex(wr, colIndex(h,'Joy')); if(ji) data.joyWk = ji;
       }
-      if (CSV.career) {
-        var cres = await fetch(CSV.career); var crows = parseCSV(await cres.text());
-        data.apps = col(crows,'Application') || data.apps;
-        data.cold = col(crows,'Cold') || data.cold;
-        data.resp = col(crows,'Response') || data.resp;
-        data.ints = col(crows,'Interview') || data.ints;
+      if (CSV.career){
+        var cr = parseCSV(await (await fetch(CSV.career)).text());
+        var ch = cr[0];
+        var a=numColByIndex(cr,colIndex(ch,'Application')); if(a) data.apps=a;
+        var c=numColByIndex(cr,colIndex(ch,'Cold')); if(c) data.cold=c;
+        var rr=numColByIndex(cr,colIndex(ch,'Response')); if(rr) data.resp=rr;
+        var it=numColByIndex(cr,colIndex(ch,'Interview')); if(it) data.ints=it;
       }
-      if (CSV.daily) {
-        var dres = await fetch(CSV.daily); var drows = parseCSV(await dres.text());
-        var days = col(drows,'Day'); var gi = col(drows,'GI');
-        if (days && gi) { var m={}; days.forEach(function(dv,i){ if(dv!==null && gi[i]!==null) m[dv]=gi[i]; }); data.giByDay=m; }
+      if (CSV.daily){
+        var dr = parseCSV(await (await fetch(CSV.daily)).text());
+        var dh = dr[0];
+        var dateIdx = colIndex(dh,'Date');
+        var giIdx = colIndex(dh,'GI');
+        if (dateIdx>=0 && giIdx>=0){
+          var map={};
+          for (var i=1;i<dr.length;i++){
+            var dayNum = dateToDay(dr[i][dateIdx]);
+            var giVal = parseFloat(dr[i][giIdx]);
+            if (dayNum && !isNaN(giVal)) map[dayNum]=giVal;
+          }
+          if (Object.keys(map).length) data.giByDay = map;
+        }
       }
-    } catch(e) { /* fall back silently to embedded data */ }
+    } catch(e){ /* silent fallback */ }
     draw(data);
   }
   loadLive();
