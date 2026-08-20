@@ -27,15 +27,16 @@
       font-family:'Montserrat',sans-serif; min-height:100svh;
       display:flex; flex-direction:column;
     }
-    nav {
-      display:flex; justify-content:flex-end; gap:28px;
-      padding:18px 32px; font-size:0.9rem;
+    .site-header {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:20px 40px; gap:24px; flex-wrap:wrap;
     }
-    nav a { color:var(--deep-navy); text-decoration:none; opacity:0.75; }
-    nav a:hover { opacity:1; color:var(--brass); }
-    main { flex:1; display:flex; align-items:center; justify-content:center; padding:12px 24px 24px; }
+    .site-header .logo { width:260px; max-width:60vw; height:auto; }
+    .site-header nav { display:flex; gap:28px; font-size:0.95rem; }
+    .site-header nav a { color:var(--deep-navy); text-decoration:none; opacity:0.75; }
+    .site-header nav a:hover { opacity:1; color:var(--brass); }
+    main { flex:1; display:flex; align-items:center; justify-content:center; padding:12px 24px 48px; }
     .hero { max-width:820px; text-align:center; display:flex; flex-direction:column; align-items:center; }
-    .hero img.logo { width:300px; max-width:78vw; height:auto; margin-bottom:10px; }
     h1 {
       font-family:'Gelasio',serif; font-weight:700;
       font-size:clamp(2rem,5.5vw,3.25rem); line-height:1.1;
@@ -66,13 +67,15 @@
   </style>
 </head>
 <body>
-  <nav>
-    <a href="casestudy.html">Case Study</a>
-    <a href="mailto:ThisIsMe@ExplainedThroughData.com">Contact</a>
-  </nav>
+  <header class="site-header">
+    <img class="logo" src="logo.png" alt="Explained Through Data">
+    <nav>
+      <a href="casestudy.html">Case Study</a>
+      <a href="mailto:ThisIsMe@ExplainedThroughData.com">Contact</a>
+    </nav>
+  </header>
   <main>
     <div class="hero">
-      <img class="logo" src="logo.png" alt="Explained Through Data">
       <h1>A 90-day transformation, measured and made visible.</h1>
       <p class="subline">A live case study, June 7 to September 4, 2026.<br>Real days, honest numbers, one system built to hold both.</p>
       <div class="dayline" id="dayline"></div>

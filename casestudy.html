@@ -25,10 +25,15 @@
     html { scroll-behavior:smooth; }
     body { background:var(--warm-paper); color:var(--deep-navy); font-family:'Montserrat',sans-serif; line-height:1.6; }
     .container { max-width:1240px; margin:0 auto; padding:24px 24px 48px; }
-    nav { display:flex; justify-content:space-between; padding:0 0 24px; font-size:0.9rem; }
-    nav a { color:var(--deep-navy); text-decoration:none; opacity:0.75; }
-    nav a:hover { opacity:1; color:var(--brass); }
-    .band { margin-bottom:64px; text-align:center; }
+    .site-header {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:20px 8px 28px; gap:24px; flex-wrap:wrap;
+    }
+    .site-header .logo { width:260px; max-width:60vw; height:auto; }
+    .site-header nav { display:flex; gap:28px; font-size:0.95rem; }
+    .site-header nav a { color:var(--deep-navy); text-decoration:none; opacity:0.75; }
+    .site-header nav a:hover { opacity:1; color:var(--brass); }
+    .band { margin-bottom:48px; text-align:center; }
     .band:last-of-type { margin-bottom:0; }
     .hero img.logo { width:300px; max-width:78vw; height:auto; margin-bottom:10px; }
     .hero h1 {
@@ -75,13 +80,15 @@
 </head>
 <body>
   <div class="container">
-    <nav>
-      <a href="/">&larr; Home</a>
-      <a href="mailto:ThisIsMe@ExplainedThroughData.com">Contact</a>
-    </nav>
+    <header class="site-header">
+      <img class="logo" src="logo.png" alt="Explained Through Data">
+      <nav>
+        <a href="/">Home</a>
+        <a href="mailto:ThisIsMe@ExplainedThroughData.com">Contact</a>
+      </nav>
+    </header>
 
     <section class="band hero">
-      <img class="logo" src="logo.png" alt="Explained Through Data">
       <h1>This is what the data shows.</h1>
       <p class="sub">A live case study, June 7 to September 4, 2026.<br>Real days, honest numbers, one system built to hold both.</p>
     </section>
@@ -228,7 +235,7 @@
     var giArr=[]; for(var d=1; d<=CURRENT_DAY; d++) giArr.push(data.giByDay[d]!==undefined?data.giByDay[d]:null);
     new Chart(document.getElementById('giChart'), {
       type:'line', data:{ labels:dayLabels(), datasets:[{ data:giArr, borderColor:NAVY, borderWidth:2, pointRadius:2, pointBackgroundColor:NAVY, spanGaps:true, tension:0.3 }] },
-      options:Object.assign(baseOpts(),{ scales:{ x:xAxis('Day',7), y:numAxis(0,10,2) } })
+      options:Object.assign(baseOpts(),{ scales:{ x:xAxis('Day', CURRENT_DAY > 120 ? 21 : (CURRENT_DAY > 80 ? 14 : 7)), y:numAxis(0,10,2) } })
     });
     function lineChart(id,arr,yopts){ new Chart(document.getElementById(id), {
       type:'line', data:{ labels:wl, datasets:[{ data:padTo(arr,CURRENT_WEEK), borderColor:NAVY, borderWidth:2, pointRadius:2, pointBackgroundColor:NAVY, spanGaps:true, tension:0.3 }] },
