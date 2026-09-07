@@ -11,17 +11,17 @@
     gtag('config', 'G-PDDWPMZY8G');
   </script>
   <title>Case Study &mdash; Explained Through Data</title>
-  <meta name="description" content="A process improvement project run on a person instead of a factory. Live charts, honest numbers, and the misses included.">
+  <meta name="description" content="The live case study behind the project. Charts read directly from the working spreadsheet, so what you see here is what the data says today.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.explainedthroughdata.com/casestudy.html">
   <meta property="og:title" content="Explained Through Data: this is what the data shows">
-  <meta property="og:description" content="A self-directed Lean Six Sigma project applying DMAIC and statistical process control to a person instead of a factory, documented in public with real data and live charts.">
+  <meta property="og:description" content="A self-directed Lean Six Sigma project applying DMAIC and statistical process control to a person instead of a factory. The charts on this page read live from the working spreadsheet.">
   <meta property="og:image" content="https://www.explainedthroughdata.com/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Explained Through Data: this is what the data shows">
-  <meta name="twitter:description" content="A process improvement project run on a person instead of a factory, documented in public with real data.">
+  <meta name="twitter:description" content="A process improvement project run on a person instead of a factory, with charts that read live from the working spreadsheet.">
   <meta name="twitter:image" content="https://www.explainedthroughdata.com/og-image.png">
 
   <link rel="icon" type="image/png" sizes="32x32" href="favicon_32.png">
@@ -29,69 +29,73 @@
   <link rel="apple-touch-icon" sizes="180x180" href="apple_touch_icon_180.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Gelasio:wght@700&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Gelasio:wght@700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   <style>
     :root { --warm-paper:#FAF8F5; --deep-navy:#20303A; --brass:#B0895E; }
     * { margin:0; padding:0; box-sizing:border-box; }
     html { scroll-behavior:smooth; }
-    body { background:var(--warm-paper); color:var(--deep-navy); font-family:'Montserrat',sans-serif; line-height:1.6; }
-    .container { max-width:1240px; margin:0 auto; padding:24px 24px 48px; }
+    body { background:var(--warm-paper); color:var(--deep-navy); font-family:'Montserrat',sans-serif; line-height:1.65; }
+
+    .container { max-width:1240px; margin:0 auto; padding:24px 24px 56px; }
+
     .site-header {
       display:flex; align-items:center; justify-content:space-between;
-      padding:20px 8px 28px; gap:24px; flex-wrap:wrap;
+      padding:20px 8px 32px; gap:24px; flex-wrap:wrap;
     }
     .site-header .logo { width:260px; max-width:60vw; height:auto; }
     .site-header nav { display:flex; gap:28px; font-size:0.95rem; }
     .site-header nav a { color:var(--deep-navy); text-decoration:none; opacity:0.75; }
     .site-header nav a:hover { opacity:1; color:var(--brass); }
-    .band { margin-bottom:48px; text-align:center; }
+
+    .band { margin-bottom:64px; text-align:center; }
     .band:last-of-type { margin-bottom:0; }
-    .hero img.logo { width:300px; max-width:78vw; height:auto; margin-bottom:10px; }
-    .hero { padding-top:32px; }
+
+    .hero { padding-top:24px; margin-bottom:72px; }
     .hero h1 {
       font-family:'Gelasio',serif; font-weight:700;
-      font-size:clamp(2rem,4.5vw,3.25rem); line-height:1.1;
-      margin:0 auto 18px; max-width:1080px;
+      font-size:clamp(2rem,4.5vw,3.25rem); line-height:1.12;
+      margin:0 auto 20px; max-width:1000px;
     }
-    .hero .sub { font-size:clamp(1rem,1.5vw,1.2rem); line-height:1.55; color:rgba(32,48,58,0.75); max-width:720px; margin:0 auto; }
+    .hero .sub {
+      font-size:clamp(1rem,1.5vw,1.2rem); line-height:1.6;
+      color:rgba(32,48,58,0.78); max-width:660px; margin:0 auto; text-align:center;
+    }
+
     .eyebrow {
-      font-weight:500; font-size:0.875rem; letter-spacing:0.15em;
-      color:var(--brass); text-transform:uppercase; margin-bottom:16px;
+      font-weight:600; font-size:0.8rem; letter-spacing:0.15em;
+      color:var(--brass); text-transform:uppercase; margin-bottom:14px;
     }
-    h2 { font-family:'Gelasio',serif; font-weight:700; font-size:clamp(1.5rem,3vw,2rem); margin-bottom:12px; }
+    h2 { font-family:'Gelasio',serif; font-weight:700; font-size:clamp(1.5rem,3vw,2rem); line-height:1.2; margin-bottom:16px; }
+
     .band p {
-      font-size:clamp(1rem,1.3vw,1.1rem);
-      max-width:620px; margin:0 auto 14px;
-      text-align:left;
+      font-size:clamp(1rem,1.25vw,1.08rem);
+      max-width:640px; margin:0 auto 16px;
+      text-align:left; color:rgba(32,48,58,0.88);
     }
-    .band p:last-child { margin-bottom:0; }
-    /* hero subline stays centered (short lines, headline treatment) */
-    .hero .sub { text-align:center; }
-    .chart-section { margin-top:36px; }
-    .chart-grid {
-      display:grid; grid-template-columns:repeat(2,1fr);
-      gap:24px; max-width:1200px; margin:0 auto;
-    }
-    .chart-cell {
-      background:#fff; border:1px solid rgba(32,48,58,0.10);
-      border-radius:12px; padding:20px;
-    }
+    .band p:last-of-type { margin-bottom:0; }
+
+    .chart-section { margin-top:40px; }
+    .chart-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; max-width:1200px; margin:0 auto; }
+    .chart-cell { background:#fff; border:1px solid rgba(32,48,58,0.10); border-radius:12px; padding:20px; }
     .chart-title { font-size:0.95rem; font-weight:500; text-align:left; margin-bottom:14px; }
     .chart-wrap { position:relative; height:270px; }
+
     .cta {
       display:inline-block; background:var(--brass); color:var(--warm-paper);
-      font-size:1.125rem; font-weight:500; padding:14px 36px;
-      border-radius:999px; text-decoration:none; transition:background-color .2s ease; margin-top:16px;
+      font-size:1.1rem; font-weight:500; padding:15px 40px;
+      border-radius:999px; text-decoration:none; transition:background-color .2s ease; margin-top:24px;
     }
     .cta:hover { background:#C2A06A; }
+
     footer { text-align:center; padding:24px; font-size:0.875rem; color:rgba(32,48,58,0.5); }
     footer a { color:inherit; text-decoration:none; }
     footer a:hover { text-decoration:underline; }
+
     @media (max-width:640px) {
       .container { padding:20px 20px 40px; }
-      .band { margin-bottom:48px; }
-      .hero img.logo { width:230px; }
+      .band { margin-bottom:52px; }
+      .hero { margin-bottom:56px; }
       .chart-grid { grid-template-columns:1fr; gap:20px; }
       .chart-wrap { height:240px; }
     }
@@ -99,6 +103,7 @@
 </head>
 <body>
   <div class="container">
+
     <header class="site-header">
       <img class="logo" src="logo.png" alt="Explained Through Data">
       <nav>
@@ -109,19 +114,20 @@
 
     <section class="band hero">
       <h1>This is what the data shows.</h1>
-      <p class="sub">The first 90 days built the system.<br>This is what year one looks like.</p>
+      <p class="sub">The first ninety days built the system. What follows is what year one looks like, and the charts below read live from the working spreadsheet.</p>
     </section>
 
     <section class="band">
       <div class="eyebrow">The Process Improvement Project</div>
-      <p>Ninety days of documenting real life without a pass or fail attached. Every morning starts with the same short set of measurements. Every evening closes with a written reflection. Three pillars run underneath: Body, Career, and Relational and Spiritual. The documenting itself is not a pillar. It is the discipline that makes the other three legible.</p>
-      <p>The frame is Lean Six Sigma, DMAIC, and Statistical Process Control, applied to a person instead of a factory. That is not a metaphor. Every measurement has an operational definition, every finding has a Special Cause or Common Cause verdict, and every ruling is dated and defensible.</p>
+      <p>For ninety days I documented real life without a pass or a fail attached to it. Every morning began with the same short set of measurements, and every evening closed with a written reflection. Three pillars run underneath the whole thing: Body, Career, and Relational and Spiritual. The documenting itself is not a fourth pillar. It is the discipline that makes the other three legible.</p>
+      <p>The frame is Lean Six Sigma, DMAIC, and statistical process control, applied to a person instead of a factory. That is not a metaphor. Every measurement carries an operational definition, every finding carries a special cause or common cause verdict, and every ruling is dated and defensible.</p>
+      <p>I registered eight predictions before I began, so that I could not move the goalposts once results started arriving. Four of them held and four of them did not. Both sets are published here, because a scorecard you cannot fail proves nothing.</p>
     </section>
 
     <section class="band">
       <div class="eyebrow">What I Control</div>
       <h2>The engine and the funnel.</h2>
-      <p>Every outcome downstream lives or dies on two inputs. The habits I complete and the reachouts I send. These are the levers, and they come first.</p>
+      <p>Every outcome further downstream depends on two inputs: the habits I complete and the reachouts I send. These are the levers I actually hold, so they come first.</p>
       <div class="chart-section">
         <div class="chart-grid">
           <div class="chart-cell">
@@ -139,7 +145,7 @@
     <section class="band">
       <div class="eyebrow">What It Produces</div>
       <h2>The outcomes, four ways.</h2>
-      <p>These are lagging indicators. They tell the truth about what the inputs are doing, sometimes on delay, always honestly.</p>
+      <p>These are lagging indicators. They tell the truth about what the inputs are doing, sometimes on a delay, and always honestly.</p>
       <div class="chart-section">
         <div class="chart-grid">
           <div class="chart-cell">
@@ -165,10 +171,11 @@
     <section class="band">
       <div class="eyebrow">What's Next</div>
       <h2>This is how I would run your accounts.</h2>
-      <p>The method transfers. Define the problem, measure before touching anything, change one thing at a time, then make sure the fix holds after the attention moves on. That works on a client relationship the same way it worked here.</p>
-      <p>I am looking for a remote Account Manager or Client Experience role where measured care is the job, not a side effect of it. If that is what you are hiring for, I would like to talk.</p>
+      <p>The method is what transfers. Define the problem before solving it, measure the current state before changing anything, move one variable at a time, and then build the control that keeps the improvement in place after the attention moves on. That works on a client relationship exactly the way it worked here.</p>
+      <p>I am looking for a remote Account Manager or Client Experience role where measured care is the job rather than a side effect of it. If that is what you are hiring for, I would like to talk.</p>
       <a class="cta" href="mailto:ThisIsMe@ExplainedThroughData.com">Get in touch</a>
     </section>
+
   </div>
 
   <footer>
